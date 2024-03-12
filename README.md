@@ -1,10 +1,10 @@
 # **MC322 - Class A**
 
 ### **Student**
-	'Luccas Bastos'
+	Luccas Bastos
 
 ### **Academic Register**
-	'RA: 240259'
+	RA: 240259
 
 ### **Course**
-	'Control and Automation Engineering'
+	Control and Automation Engineering
