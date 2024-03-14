@@ -1,4 +1,7 @@
 package lab01;
+import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Jogador {
 	private String nome;
@@ -134,7 +137,19 @@ public class Jogador {
 	}
 	
 	public static boolean validarEmail(String email){
-		return true;
+		String newEmail = email;
+		
+		String regex, input;
+		Pattern pattern = Pattern.compile(regex = "([a-z0-9_-_.]{2,})@([a-z0-9]{2,})(\\.[a-z]{2,})(\\.[a-z]{2,})?");
+		Matcher matcher = pattern.matcher(newEmail);
+		
+		if (matcher.find() == true) {
+			return true;
+		}
+		else {
+			return false;
+		}
+		
 	}
-	
+			
 }
