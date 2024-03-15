@@ -9,7 +9,7 @@ public class Jogador {
 	private String email;
 	private String foto;
 	
-	//Construtor
+	//Construtores
 	public Jogador () {
 		
 	}
@@ -54,12 +54,22 @@ public class Jogador {
 		this.foto = foto;
 	}
 	
+	/*
+	 * Validacao do CPF digitado pelo usuario segundo os seguintes parametros:
+	 	* Remover todos os caracteres nao numericos do CPF usando o metodo replaceAll.
+	 	* Verificar se o CPF tem 11 dıgitos. Se nao tiver, retornar false.
+	 	* Verificar se todos os dIgitos sao iguais. Se forem, retornar false.
+	 	* Calcular os dıgitos verificadores usando o algoritmo apropriado.
+	 	* Verificar se os dıgitos verificadores calculados sao iguais aos dıgitos verificadores do CPF. Se forem, retornar true. Caso contrario, false.
+	 	* Caso o CPF seja validado sera mostrado uma mensagem positiva referente a verificacao, caso contrario, sera pedido para digitar novamente.
+	 */
+	
 	public static boolean validarCPF(String cpf){
 		String newcpf = cpf.replaceAll("\\p{Punct}","");
 	
-		//Verificar se o CPF tem 11 digitos, caso contrário retornar falso
+		//Verificar se o CPF tem 11 digitos, caso contrário, retornar falso
 		int i, n = 0;
-		n = newcpf.length(); //Devolve o tamanho do CPF	
+		n = newcpf.length();
 		if (n != 11) {
 			return false;
 		}
@@ -91,7 +101,7 @@ public class Jogador {
 		if (soma != 00 && soma != 11 && soma != 22 && soma != 33 && soma != 44 && soma != 55 && soma != 66 && soma != 77 && soma != 88 && soma != 99){
 			return false;}
 		
-		//Verificar se os dígitos verificadores calculados são iguais aos verificadores do CPF
+		//Verificar se os digitos verificadores calculados sao iguais aos verificadores do CPF
 		int soma1 = 0;
 		int resto1 = 0;
 		int sum = 0;
@@ -136,11 +146,17 @@ public class Jogador {
 		return true;
 	}
 	
+	/*
+	 * Verificacao do email inserido pelo usuario com base nos seguintes criterios:
+	 * Analisar se o email contem uma palavra, envolvendo numero ou não, em seguida o @, outra palavra referente ao dominio e, por ultimo, os servidores .
+	 * Caso obedeca todos os pré requisitos, retornará verdade e uma frase positiva relativo a verificacao. Caso contrario inserir o email novamente.
+	 */
+	
 	public static boolean validarEmail(String email){
 		String newEmail = email;
 		
 		String regex, input;
-		Pattern pattern = Pattern.compile(regex = "([a-z0-9_-_.]{2,})@([a-z0-9]{2,})(\\.[a-z]{2,})(\\.[a-z]{2,})?");
+		Pattern pattern = Pattern.compile(regex = "([a-z0-9_-_.]{2,})@([a-z0-9]{2,})(\\.[a-z]{2,})(\\.[a-z]{2,})?(\\\\.[a-z]{2,})?");
 		Matcher matcher = pattern.matcher(newEmail);
 		
 		if (matcher.find() == true) {
