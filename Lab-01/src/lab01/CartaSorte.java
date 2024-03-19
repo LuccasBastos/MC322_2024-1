@@ -11,6 +11,10 @@ public class CartaSorte {
 	private int restricao;
 	
 	//Construtor
+	public CartaSorte () {
+		
+	}
+		
 	public CartaSorte(int id, String descricao, int movimento, int efeito, float valor, String acao, int tempo,	int restricao) {
 		this.id = id;
 		this.descricao = descricao;

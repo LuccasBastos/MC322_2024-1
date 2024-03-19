@@ -98,20 +98,21 @@ public class Jogador {
 			soma = soma + somador;
 			}
 		
-		if (soma != 00 && soma != 11 && soma != 22 && soma != 33 && soma != 44 && soma != 55 && soma != 66 && soma != 77 && soma != 88 && soma != 99){
-			return false;}
-		
 		//Verificar se os digitos verificadores calculados sao iguais aos verificadores do CPF
 		int soma1 = 0;
 		int resto1 = 0;
 		int sum = 0;
 		for (i = 0; i < 9; i++) {
 			char num = newcpf.charAt(i);
-			soma1 = Character.getNumericValue(num);
+			soma1 = num - '0';
 			sum = sum + (soma1 * (i+1));
 			if (i==8) {
 				resto1 = sum % 11;
+			if (resto1 == 10 || resto1 == 11) {
+					resto1 = 0;
+				}
 			}
+		
 		}
 		
 		int soma2 = 0;
@@ -119,17 +120,21 @@ public class Jogador {
 		int summ = 0;
 		for (i = 0; i < 10; i++) {
 			char num = newcpf.charAt(i);
-			soma2 = Character.getNumericValue(num);
+			soma2 = num - '0';
 			summ = summ + (soma2 * i);
 			if (i==9) {
 				resto2 = summ % 11;
+			if (resto2 == 10 || resto2 == 11) {
+					resto2 = 0;
+				}
 			}
 		}
+		
 		
 		int numb = 0;
 		for (i = 9; i < 10; i++) {
 			char num = newcpf.charAt(i);
-			numb = Character.getNumericValue(num);
+			numb = num - '0';
 			if (numb != resto1) {
 				return false;
 			}
@@ -138,7 +143,7 @@ public class Jogador {
 		int numbe = 0;
 		for (i = 10; i < 11; i++) {
 			char num = newcpf.charAt(i);
-			numbe = Character.getNumericValue(num);
+			numbe = num - '0';
 			if (numbe != resto2) {
 				return false;
 			}
@@ -155,17 +160,11 @@ public class Jogador {
 	public static boolean validarEmail(String email){
 		String newEmail = email;
 		
-		String regex, input;
+		String regex;
 		Pattern pattern = Pattern.compile(regex = "([a-z0-9_-_.]{2,})@([a-z0-9]{2,})(\\.[a-z]{2,})(\\.[a-z]{2,})?(\\\\.[a-z]{2,})?");
 		Matcher matcher = pattern.matcher(newEmail);
 		
-		if (matcher.find() == true) {
-			return true;
-		}
-		else {
-			return false;
-		}
-		
+		return matcher.find();
 	}
 			
 }

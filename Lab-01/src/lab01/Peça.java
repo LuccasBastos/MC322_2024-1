@@ -5,6 +5,10 @@ public class Peça {
 	private int posicao;
 
 	//Construtor
+	public Peça () {
+		
+	}
+	
 	public Peça (String cor, int posicao) {
 		this.cor = cor;
 		this.posicao = posicao;
