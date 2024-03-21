@@ -16,10 +16,10 @@ public class Main {
 		Thread.sleep(2000);
 		System.out.println("Seja bem vindo ao jogo Monopoly!"); 
 		Thread.sleep(2000);
-		System.out.println("Para começarmos, realizaremos o seu cadastro\n"); 
+		System.out.println("Para começar, realizaremos o seu cadastro\n"); 
 		Thread.sleep(2000);
 		
-		System.out.println("Digite seu Nome Completo: "); //Pede para o usuario inserir o nome completo
+		System.out.println("Digite seu Nome: "); //Pede para o usuario inserir o nome completo
 		String Nome_usuario = teclado.nextLine();
 		
 		Boolean resp = false, Email = false;
