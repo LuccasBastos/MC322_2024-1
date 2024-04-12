@@ -1,3 +1,6 @@
+/*
+ * Modificações realizadas - Lab2
+ */
 package lab01;
 
 public class CartaSorte {
@@ -11,8 +14,8 @@ public class CartaSorte {
 	private int restricao;
 	
 	//Construtor
-	public CartaSorte () {
-		
+	public CartaSorte (String acao) {
+		this.acao = acao;
 	}
 		
 	public CartaSorte(int id, String descricao, int movimento, int efeito, float valor, String acao, int tempo,	int restricao) {

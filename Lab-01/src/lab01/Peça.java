@@ -1,3 +1,6 @@
+/*
+ * Modificações realizadas - Lab2
+ */
 package lab01;
 
 public class Peça {
@@ -5,8 +8,8 @@ public class Peça {
 	private int posicao;
 
 	//Construtor
-	public Peça () {
-		
+	public Peça (String cor) {
+		this.cor = cor;
 	}
 	
 	public Peça (String cor, int posicao) {
