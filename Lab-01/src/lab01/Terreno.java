@@ -15,7 +15,6 @@ public class Terreno extends Propriedade{
 	}
 	
 	public Terreno(String nome, String proprietario, int numeroCasas, int valorCasa, int valorHotel, boolean hotel) {
-		
 		super(nome, proprietario);
 		this.numeroCasas = numeroCasas;
 		this.valorCasa = valorCasa;
@@ -55,20 +54,20 @@ public class Terreno extends Propriedade{
 		this.hotel = hotel;
 	}
 	
-	public int calcularAluguel() {
+	public int calcularAluguel(){
 		int al = Math.round(getAluguel());
 		return al;
 	}
 	
-	public boolean comprarCasa() {
-		if(numeroCasas > 0) {
+	public boolean comprarCasa(){
+		if(numeroCasas > 0 && numeroCasas < 4){
 			return true;
 		}
 		return false;
 	}
 	
-	public boolean comprarHotel() {
-		if(numeroCasas > 4) {
+	public boolean comprarHotel(){
+		if(numeroCasas >= 4){
 			return true;
 		}
 		return false;

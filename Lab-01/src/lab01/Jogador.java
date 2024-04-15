@@ -1,4 +1,5 @@
 package lab01;
+import java.util.Random;
 
 public class Jogador extends Biblioteca {
 	private int id = 0;
@@ -9,12 +10,12 @@ public class Jogador extends Biblioteca {
 	private String foto;
 	
 	//Construtores
-	public Jogador () {
+	public Jogador (String nome) {
 		this.nome = "";
 		this.cpf = "";
 		this.email = "";
 		this.foto = "";
-		this.id	= id++;
+		this.id	= getId();
 		this.dinheiro = 2458;
 	}
 	
@@ -23,12 +24,14 @@ public class Jogador extends Biblioteca {
 		this.cpf = cpf;
 		this.email = email;
 		this.foto = foto;
-		this.id	= id++;
+		this.id	= getId();
 		this.dinheiro = 2458;
 	}
 	
 	//Getters and Setters
 	public int getId() {
+		Random random = new Random();
+		id = random.nextInt(6);
 		return id;
 	}
 
