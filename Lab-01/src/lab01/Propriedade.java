@@ -1,35 +1,19 @@
 package lab01;
 
-public class Propriedade {
-	private int id;
+public class Propriedade extends Carta {
 	private String nome;
-	private String proprietario;
 	private int preco;
 	private float aluguel;
-	
-	
-	public Propriedade(String nome, String proprietario) {
-		this.id = 0;
-		this.nome = "";
-		this.proprietario = "";
-		this.preco = 0;
-		this.aluguel = 0;
+
+	public Propriedade (int id, String descricao, Jogador dono) {
+		super(id, descricao, dono);
 	}
 	
-	public Propriedade(int id, String nome, String proprietario, int preco, float aluguel) {
-		this.id = id;
+	public Propriedade(int id, String descricao, Jogador dono, String nome, int preco, float aluguel) {
+		super(id, descricao, dono);
 		this.nome = nome;
-		this.proprietario = proprietario;
 		this.preco = preco;
 		this.aluguel = aluguel;
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
 	}
 
 	public String getNome() {
@@ -38,14 +22,6 @@ public class Propriedade {
 
 	public void setNome(String nome) {
 		this.nome = nome;
-	}
-
-	public String getProprietario() {
-		return proprietario;
-	}
-
-	public void setProprietario(String proprietario) {
-		this.proprietario = proprietario;
 	}
 
 	public int getPreco() {

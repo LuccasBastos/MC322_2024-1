@@ -6,16 +6,16 @@ public class Terreno extends Propriedade{
 	private int valorHotel;
 	private boolean hotel;
 	
-	public Terreno(String nome, String proprietario) {
-		super(nome, proprietario);
-		this.numeroCasas = 0;
-		this.valorCasa = 0;
-		this.valorHotel = 0;
-		this.hotel = false;
+	public Terreno(int id, String descricao, Jogador dono) {
+		super(id, descricao, dono);
 	}
 	
-	public Terreno(String nome, String proprietario, int numeroCasas, int valorCasa, int valorHotel, boolean hotel) {
-		super(nome, proprietario);
+	public Terreno(int id, String descricao, Jogador dono, String nome, int preco, float aluguel) {
+		super(id, descricao, dono, nome, preco, aluguel);
+	}
+
+	public Terreno(int id, String descricao, Jogador dono, int numeroCasas, int valorCasa, int valorHotel, boolean hotel) {
+		super(id, descricao, dono);
 		this.numeroCasas = numeroCasas;
 		this.valorCasa = valorCasa;
 		this.valorHotel = valorHotel;

@@ -1,26 +1,21 @@
-/*
- * Modificações realizadas - Lab2
- */
 package lab01;
 
-public class CartaSorte {
-	private int id;
-	private String descricao;
-	private int movimento;
-	private int efeito;
+public class CartaSorte extends Carta {
+	private int movimento; 
+	private int efeito; 
 	private float valor;
-	private String acao;
-	private int tempo;
-	private int restricao;
+	private String acao; 
+	private int tempo; 
+	private int restricao; 
 	
 	//Construtor
-	public CartaSorte (String acao) {
+	public CartaSorte(int id, String descricao, Jogador dono, String acao) {		
+		super(id, descricao, dono);
 		this.acao = acao;
 	}
 		
-	public CartaSorte(int id, String descricao, int movimento, int efeito, float valor, String acao, int tempo,	int restricao) {
-		this.id = id;
-		this.descricao = descricao;
+	public CartaSorte(int id, String descricao, Jogador dono, int movimento, int efeito, float valor, String acao, int tempo, int restricao) {
+		super(id, descricao, dono);
 		this.movimento = movimento;
 		this.efeito = efeito;
 		this.valor = valor;
@@ -30,22 +25,6 @@ public class CartaSorte {
 	}
 
 	//Getters and Setters
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public String getDescricao() {
-		return descricao;
-	}
-
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
-	}
-
 	public int getMovimento() {
 		return movimento;
 	}
@@ -92,7 +71,5 @@ public class CartaSorte {
 
 	public void setRestricao(int restricao) {
 		this.restricao = restricao;
-	}
-	
-	
+	}	
 }

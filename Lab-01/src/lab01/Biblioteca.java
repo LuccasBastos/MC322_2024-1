@@ -111,5 +111,10 @@ public class Biblioteca {
 		Matcher matcher = pattern.matcher(newEmail);
 		
 		return matcher.find();
-	}		
+	}
+	
+	public static int lancarDados() {
+		int dado = (int) (Math.random()*12+1);
+		return dado;
+	}
 }
