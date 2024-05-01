@@ -64,19 +64,19 @@ public class Main {
 								
 				Peca peca = Tab.jogadores.get(i).getPeca();
 				System.out.println("\nEscolha o número referente a cor da sua Peça:");
-	            for (int k = 0; k < Cores_disp.size(); k++) {
-	                System.out.println((k + 1) + ". " + Cores_disp.get(k));
-	            }
-	            int escolha = teclado.nextInt();
-	            teclado.nextLine();
-	            if (escolha >= 1 && escolha <= Cores_disp.size()) {
-	                String Cor_selec = Cores_disp.remove(escolha - 1);
-	                peca.setCor(Cor_selec);
-	                /*if (peca != null) {
-						peca.setCor(Cor_selecionada);
-						peca.setPosicao(0);
-					}*/
-	            } 
+				for (int k = 0; k < Cores_disp.size(); k++) {
+					System.out.println((k + 1) + ". " + Cores_disp.get(k));
+					}
+				int escolha = teclado.nextInt();
+				teclado.nextLine();
+				if (escolha >= 1 && escolha <= Cores_disp.size()) {
+					String Cor_selec = Cores_disp.remove(escolha - 1);
+					peca.setCor(Cor_selec);
+					/*if (peca != null) {
+					 * peca.setCor(Cor_selecionada);
+					 * peca.setPosicao(0);
+					 * }*/
+					} 
 				
 				if(i != Num_Jogadores - 1) {
 					Thread.sleep(millis/2);
@@ -96,13 +96,14 @@ public class Main {
 		 * Talvez uma opção seja tornar o lançamento do dado individual por jogador > Chama o jogador e ele "aciona" o dado
 		 */
 		System.out.println("Realizaremos a ordem dos jogadores. Quem tirar o valor mais alto no dado inicia e assim por diante. Em caso de empate, jogue os dados novamente.");
+		Thread.sleep(millis);
 		ArrayList<Integer> ordem = new ArrayList<Integer>();
 		//char opcao = 's';
 		//while (opcao == 's') {
 			//ordem.removeAll(ordem);
 			for (int a = 0; a < Num_Jogadores; a++) {
 				int pos = 0;
-				System.out.println(Tab.jogadores.get(a).getNome() + " lançou o dado e tirou " + (pos = Biblioteca.lancarDados()));
+				//System.out.println(Tab.jogadores.get(a).getNome() + " lançou os dados e tirou " + (pos = Biblioteca.lancarDados()));
 				Thread.sleep(millis);
 				Tab.jogadores.get(a).setId(pos);
 				ordem.add(pos);
@@ -122,11 +123,11 @@ public class Main {
 		 */
 		//for(int k = 0; k < 2; k++) { 
 			for(int j = 0; j < Num_Jogadores; j++) {
-				int i = j+1;
+				//int i = j+1;
 				Peca peca = Tab.jogadores.get(j).getPeca();
 				int ld = Biblioteca.lancarDados();
 				peca.setPosicao(ld + peca.getPosicao());
-				System.out.println("Jog" + i + " " + peca.getPosicao() + " --- " + ld);
+				//System.out.println("Jog" + i + " " + peca.getPosicao() + " --- " + ld);
 				
 				switch (peca.getPosicao()){
 					case 1:
