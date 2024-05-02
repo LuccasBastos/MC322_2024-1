@@ -1,6 +1,8 @@
 package lab01;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -72,12 +74,8 @@ public class Main {
 				if (escolha >= 1 && escolha <= Cores_disp.size()) {
 					String Cor_selec = Cores_disp.remove(escolha - 1);
 					peca.setCor(Cor_selec);
-					/*if (peca != null) {
-					 * peca.setCor(Cor_selecionada);
-					 * peca.setPosicao(0);
-					 * }*/
-					} 
-				
+				}	
+						
 				if(i != Num_Jogadores - 1) {
 					Thread.sleep(millis/2);
 					System.out.println("\nPróximo jogador a ser cadastrado!\n");
@@ -85,32 +83,31 @@ public class Main {
 				}
 			}
 		}
+		
 		Thread.sleep(millis);
 		System.out.println("\nCadastros finalizados!\n");
 		Thread.sleep(millis);
 		
 		/*  
-		 * Preciso descobrir como reordenar a lista de jogadores no Tabuleiro pra ficar na ordem dos dados. Além disso, identificar se houve empate nos dados, possibilitar que aqueles
-		 * jogadores joguem novamente
-		 * 
-		 * Talvez uma opção seja tornar o lançamento do dado individual por jogador > Chama o jogador e ele "aciona" o dado
+		 * Os jogadores lançam os dados e verificam quem iniciará a partida. Em casa de empate em 2 ou mais jogadores, a ordem de lançamento é o fator desempate.
 		 */
-		System.out.println("Realizaremos a ordem dos jogadores. Quem tirar o valor mais alto no dado inicia e assim por diante. Em caso de empate, jogue os dados novamente.");
+		System.out.println("Realizaremos a ordem dos jogadores. Quem tirar o valor mais alto no dado inicia e assim por diante. Em caso de empate, quem lançou primeiro terá preferência.");
 		Thread.sleep(millis);
-		ArrayList<Integer> ordem = new ArrayList<Integer>();
-		//char opcao = 's';
-		//while (opcao == 's') {
-			//ordem.removeAll(ordem);
-			for (int a = 0; a < Num_Jogadores; a++) {
-				int pos = 0;
-				//System.out.println(Tab.jogadores.get(a).getNome() + " lançou os dados e tirou " + (pos = Biblioteca.lancarDados()));
-				Thread.sleep(millis);
-				Tab.jogadores.get(a).setId(pos);
-				ordem.add(pos);
-			}
-		//System.out.println("Teve empate entre os jogadores?");
-		//opcao = teclado.next().charAt(0);
-		//}
+
+		for (int a = 0; a < Num_Jogadores; a++) {
+			int pos;
+			System.out.println(Tab.jogadores.get(a).getNome() + " lançou os dados e tirou " + (pos = Biblioteca.lancarDados()));
+			Thread.sleep(millis);
+			Tab.jogadores.get(a).setId(pos);
+		}
+		
+		Collections.sort(Tab.jogadores, Comparator.comparingInt(Jogador::getId).reversed());
+		Thread.sleep(millis);
+		System.out.println("\nA ordem dos jogadores ficou a seguinte: ");
+		
+		for (int q = 0; q < Num_Jogadores; q++) {
+			System.out.println((q + 1) + "ª posição " + Tab.jogadores.get(q).getNome());
+		}
 			
 		Thread.sleep(millis);
 		System.out.println("\n\t >>> QUE COMECEM OS JOGOS!! <<< \n\t");
