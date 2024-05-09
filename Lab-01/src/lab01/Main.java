@@ -36,7 +36,7 @@ public class Main {
 				String Nome_usuario = teclado.nextLine();
 				Tab.jogadores.get(i).setNome(Nome_usuario);
 						
-				Boolean resp = false, Email = false;
+				/*Boolean resp = false, Email = false;
 				while (resp == false) {
 					System.out.println("Certo " + Tab.jogadores.get(i).getNome() + ", agora digite seu CPF: ");
 					String CPF_digitado = teclado.nextLine();
@@ -59,7 +59,7 @@ public class Main {
 				Thread.sleep(millis);
 				System.out.println(">>> Email validado <<< \n"); 
 
-				System.out.println("Insira o link de sua foto: "); 
+				System.out.println("Insira o link de sua foto: (Escreva 'Link' apenas)"); 
 				String foto_inserida = teclado.nextLine();
 				Tab.jogadores.get(i).setFoto(foto_inserida);
 				Thread.sleep(millis);
@@ -80,7 +80,7 @@ public class Main {
 					Thread.sleep(millis/2);
 					System.out.println("\nPróximo jogador a ser cadastrado!\n");
 					Thread.sleep(millis/2);
-				}
+				}*/
 			}
 		}
 		
@@ -91,7 +91,7 @@ public class Main {
 		/*  
 		 * Os jogadores lançam os dados e verificam quem iniciará a partida. Em casa de empate em 2 ou mais jogadores, a ordem de lançamento é o fator desempate.
 		 */
-		System.out.println("Realizaremos a ordem dos jogadores. Quem tirar o valor mais alto no dado inicia e assim por diante. Em caso de empate, quem lançou primeiro terá preferência.");
+		/*System.out.println("Realizaremos a ordem dos jogadores. Quem tirar o valor mais alto no dado inicia e assim por diante. Em caso de empate, quem lançou primeiro terá preferência.");
 		Thread.sleep(millis);
 
 		for (int a = 0; a < Num_Jogadores; a++) {
@@ -110,7 +110,7 @@ public class Main {
 		}
 			
 		Thread.sleep(millis);
-		System.out.println("\n\t >>> QUE COMECEM OS JOGOS!! <<< \n\t");
+		System.out.println("\n\t >>> QUE COMECEM OS JOGOS!! <<< \n\t");*/
 		
 		/*
 		 * Inicia uma nova rodada. 
@@ -121,131 +121,138 @@ public class Main {
 		//for(int k = 0; k < 2; k++) { 
 			for(int j = 0; j < Num_Jogadores; j++) {
 				//int i = j+1;
-				Peca peca = Tab.jogadores.get(j).getPeca();
+				Peca peca = Tab.jogadores.get(j).getPeca();				
 				int ld = Biblioteca.lancarDados();
 				peca.setPosicao(ld + peca.getPosicao());
-				//System.out.println("Jog" + i + " " + peca.getPosicao() + " --- " + ld);
+				
+				if(peca.getPosicao()>40) {
+					int pos = peca.getPosicao() - 40;
+					peca.setPosicao(pos);
+					Tab.jogadores.get(j).setDinheiro(Tab.jogadores.get(j).getDinheiro() + 2000);
+				}
 				
 				switch (peca.getPosicao()){
 					case 1:
-						System.out.println("Casa iniciar");
+						System.out.println("Você caiu na casa: Iniciar"); //check
 						break;
 					case 2:
-						System.out.println("Av. Nove de Julho");
+						System.out.println("Você caiu na casa: Av. Nove de Julho");
 						break;
 					case 3:
-						System.out.println("Av. Brasil");
+						System.out.println("Você caiu na casa: Av. Brasil");
 						break;
 					case 4:
-						System.out.println("RU");
+						System.out.println("Você caiu na casa: RU");
 						break;
 					case 5:
-						System.out.println("Av. Beira Mar");
+						System.out.println("Você caiu na casa: Av. Beira Mar");
 						break;
 					case 6:
-						System.out.println("Av. Rio Branco");
+						System.out.println("Você caiu na casa: Av. Rio Branco");
 						break;
 					case 7:
-						System.out.println("Sorte/Reves");
+						System.out.println("Você caiu na casa: Sorte/Reves");
 						break;
 					case 8:
-						System.out.println("Av. do Estado");
+						System.out.println("Você caiu na casa: Av. do Estado");
 						break;
 					case 9:
-						System.out.println("IFCH");
+						System.out.println("Você caiu na casa: IFCH");
 						break;
 					case 10:
-						System.out.println("Av. do Contorno");
+						System.out.println("Você caiu na casa: Av. do Contorno");
 						break;
 					case 11:
-						System.out.println("Prisao");
+						System.out.println("Você caiu na casa: Prisão\n É apenas uma visita!"); //check
 						break;
 					case 12:
-						System.out.println("Sorte/Reves");
+						System.out.println("Você caiu na casa: Sorte/Reves");
 						break;
 					case 13:
-						System.out.println("Av. Reboucas");
+						System.out.println("Você caiu na casa: Av. Reboucas");
 						break;
 					case 14:
-						System.out.println("Av. Santo Amaro");
+						System.out.println("Você caiu na casa: Av. Santo Amaro");
 						break;
 					case 15:
-						System.out.println("CB");
+						System.out.println("Você caiu na casa: CB");
 						break;
 					case 16:
-						System.out.println("Rua da Consolacao");
+						System.out.println("Você caiu na casa: Rua da Consolacao");
 						break;
 					case 17:
-						System.out.println("Lucro/Dividendos");
+						System.out.println("Você caiu na casa: Lucro/Dividendos");
 						break;
 					case 18:
-						System.out.println("Av. Morumbi");
+						System.out.println("Você caiu na casa: Av. Morumbi");
 						break;
 					case 19:
-						System.out.println("Av. Higienopolis");
+						System.out.println("Você caiu na casa: Av. Higienopolis");
 						break;
 					case 20:
-						System.out.println("Av. Sao Joao");
+						System.out.println("Você caiu na casa: Av. Sao Joao");
 						break;
 					case 21:
-						System.out.println("Parada Livre - Ferias");
+						System.out.println("Você caiu na casa: Parada Livre - Férias\n Aproveite um pouco, pegue uma bebiba!"); //check
 						break;
 					case 22:
-						System.out.println("Av. Ipiranga");
+						System.out.println("Você caiu na casa: Av. Ipiranga");
 						break;
 					case 23:
-						System.out.println("FEF");
+						System.out.println("Você caiu na casa: FEF");
 						break;
 					case 24:
-						System.out.println("Impostos de Renda");
+						System.out.println("Você caiu na casa: Impostos de Renda");
 						break;
 					case 25:
-						System.out.println("Sorte/Reves");
+						System.out.println("Você caiu na casa: Sorte/Reves");
 						break;
 					case 26:
-						System.out.println("Rua Brigadeiro Faria Lima");
+						System.out.println("Você caiu na casa: Rua Brigadeiro Faria Lima");
 						break;
 					case 27:
-						System.out.println("Av. Paulista");
+						System.out.println("Você caiu na casa: Av. Paulista");
 						break;
 					case 28:
-						System.out.println("Sorte/Reves");
+						System.out.println("Você caiu na casa: Sorte/Reves");
 						break;
 					case 29:
-						System.out.println("Av. Recife");
+						System.out.println("Você caiu na casa: Av. Recife");
 						break;
 					case 30:
-						System.out.println("IC");
+						System.out.println("Você caiu na casa: IC");
 						break;
 					case 31:
-						System.out.println("Va para a prisao");
+						System.out.println("Você caiu na casa: Vá para a prisao\n Caiu a casa pra você!");
+						Tab.jogadores.get(j).getPeca().setPosicao(11);
+						// Colocar as formas que o jogador pode sair da prisão
 						break;
 					case 32:
-						System.out.println("Av. JK");
+						System.out.println("Você caiu na casa: Av. JK");
 						break;
 					case 33:
-						System.out.println("Sorte/Reves");
+						System.out.println("Você caiu na casa: Sorte/Reves");
 						break;
 					case 34:
-						System.out.println("Rua Oscar Freire");
+						System.out.println("Você caiu na casa: Rua Oscar Freire");
 						break;
 					case 35:
-						System.out.println("Av. Ibirapuera");
+						System.out.println("Você caiu na casa: Av. Ibirapuera");
 						break;
 					case 36:
-						System.out.println("Av. Vieira Souto");
+						System.out.println("Você caiu na casa: Av. Vieira Souto");
 						break;
 					case 37:
-						System.out.println("Praca da Paz");
+						System.out.println("Você caiu na casa: Praça da Paz");
 						break;
 					case 38:
-						System.out.println("Av. Presidente Vargas");
+						System.out.println("Você caiu na casa: Av. Presidente Vargas");
 						break;
 					case 39:
-						System.out.println("Sorte/Reves");
+						System.out.println("Você caiu na casa: Sorte/Reves");
 						break;
 					case 40:
-						System.out.println("Av. Niemeyer");
+						System.out.println("Você caiu na casa: Av. Niemeyer");
 						break;
 				}
 			}
