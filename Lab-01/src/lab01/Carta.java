@@ -3,14 +3,15 @@ package lab01;
 public class Carta {
 	private int id;
 	private String descricao;
-	private Jogador dono;
+	private TipoCarta tipo;
 	
-	public Carta(int id, String descricao, Jogador dono){
+	public Carta(int id, String descricao, TipoCarta tipo){
 		this.id = id;
 		this.descricao = descricao;
-		this.dono = dono;
+		this.setTipo(tipo);
 	}
 	
+	//Getters & Setters
 	public int getId(){
 		return id;
 	}
@@ -27,7 +28,16 @@ public class Carta {
 		this.descricao = descricao;
 	}
 	
-	public Jogador getDono(){
-		return dono;
+	//Métodos
+	public void executarAcao(Jogador jogador) {
+		
+	}
+
+	public TipoCarta getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(TipoCarta tipo) {
+		this.tipo = tipo;
 	}
 }

@@ -6,16 +6,16 @@ public class CartaSorte extends Carta {
 	private float valor;
 	private String acao; 
 	private int tempo; 
-	private int restricao; 
+	private String restricao; 
 	
 	//Construtor
-	public CartaSorte(int id, String descricao, Jogador dono, String acao) {		
-		super(id, descricao, dono);
+	public CartaSorte(int id, String descricao, TipoCarta tipo, String acao) {		
+		super(id, descricao, tipo);
 		this.acao = acao;
 	}
 		
-	public CartaSorte(int id, String descricao, Jogador dono, int movimento, int efeito, float valor, String acao, int tempo, int restricao) {
-		super(id, descricao, dono);
+	public CartaSorte(int id, String descricao, TipoCarta tipo, int movimento, int efeito, float valor, String acao, int tempo, String restricao) {
+		super(id, descricao, tipo);
 		this.movimento = movimento;
 		this.efeito = efeito;
 		this.valor = valor;
@@ -23,7 +23,7 @@ public class CartaSorte extends Carta {
 		this.tempo = tempo;
 		this.restricao = restricao;
 	}
-
+	
 	//Getters and Setters
 	public int getMovimento() {
 		return movimento;
@@ -65,11 +65,17 @@ public class CartaSorte extends Carta {
 		this.tempo = tempo;
 	}
 
-	public int getRestricao() {
+	public String getRestricao() {
 		return restricao;
 	}
 
-	public void setRestricao(int restricao) {
+	public void setRestricao(String restricao) {
 		this.restricao = restricao;
 	}	
+	
+	//Métodos
+	public int executaAcao (int dinheiro) {
+		int dinheiroAt = dinheiro - Math.round(getValor());
+		return dinheiroAt;
+	}
 }

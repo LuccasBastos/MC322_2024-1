@@ -2,12 +2,11 @@ package lab01;
 import java.util.ArrayList;
 
 public class Jogador extends Biblioteca {
-	private int id = 0;
+	private int id;
 	private int dinheiro;
 	private String nome;
 	private String cpf;
 	private String email;
-	private String foto;
 	ArrayList<Carta> cartas = new ArrayList<Carta>();
 	private Peca peca;
 	
@@ -16,24 +15,21 @@ public class Jogador extends Biblioteca {
 		this.nome = "";
 		this.cpf = "";
 		this.email = "";
-		this.foto = "";
 		this.id	= getId();
-		this.dinheiro = 2458;
+		this.dinheiro = 0;
 		this.peca = new Peca("");
 	}
 	
-	public Jogador (String nome, String cpf, String email, String foto, int id, int dinheiro, Peca peca) {
+	public Jogador (String nome, String cpf, String email, int id, int dinheiro, Peca peca) {
 		this.nome = nome;
 		this.cpf = cpf;
 		this.email = email;
-		this.foto = foto;
 		this.id	= getId();
-		this.dinheiro = 2458;
+		this.dinheiro = 0;
 		this.peca = peca;
 	}
 	
 	//Getters and Setters
-
 	public int getId() {
 		return id;
 	}
@@ -74,14 +70,6 @@ public class Jogador extends Biblioteca {
 		this.email = email;
 	}
 	
-	public String getFoto() {
-		return foto;
-	}
-	
-	public void setFoto(String foto) {
-		this.foto = foto;
-	}
-	
 	public ArrayList<Carta> getCartas() {
 		return cartas;
 	}
@@ -98,10 +86,10 @@ public class Jogador extends Biblioteca {
 		this.peca = peca;
 	}
 		
-	@Override
+	//ToString @Override
 	public String toString() {
 		return "Dados do jogador " + nome + ":\n" + " >>> Identificação: " + id + "\n >>> CPF: " + cpf + "\n >>> E-mail: " + email
-				+ "\n >>> Foto: " + foto + "\n >>> Dinheiro atual: R$" + dinheiro + "\n" + "Cor da peça: " + getPeca().getCor();
+				+ "\n >>> Dinheiro atual: R$" + dinheiro + "\n" + "Cor da peça: " + getPeca().getCor();
 	}
 
 }

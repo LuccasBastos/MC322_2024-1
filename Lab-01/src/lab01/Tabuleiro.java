@@ -23,7 +23,7 @@ public class Tabuleiro {
 	
 	public boolean addPropriedade(int nprop){
 		for(k=0; k<nprop; k++){
-			propriedades.add(new Propriedade(0, null, null));
+			propriedades.add(new Propriedade(0, null, null, null));
 		}
 		return true;
 	} 
@@ -33,5 +33,9 @@ public class Tabuleiro {
 			propriedades.remove(nprop);
 		}
 		return true;
+	}
+	
+	public void distribuirCartas() {
+		
 	}
 }

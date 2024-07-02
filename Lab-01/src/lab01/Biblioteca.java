@@ -1,4 +1,5 @@
 package lab01;
+import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -114,7 +115,8 @@ public class Biblioteca {
 	}
 	
 	public static int lancarDados() {
-		int dado = (int) (Math.random()*12+1);
+		Random random = new Random();
+		int dado = random.nextInt(12) + 2;
 		return dado;
 	}
 }
