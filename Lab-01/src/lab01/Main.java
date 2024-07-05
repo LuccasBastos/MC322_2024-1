@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
 
 public class Main {
@@ -38,12 +39,12 @@ public class Main {
 			
 			for (int i = 0; i < Num_Jogadores; i++) {
 				int j = i + 1;
-				escritor.write("Jogador " + j + ":\n");
 				System.out.println("Digite o nome do Jogador " + j + ":");  
 				String Nome_usuario = teclado.nextLine();
+				escritor.write("\tJogador " + j + ": " + Nome_usuario + "\n");
 				Tab.jogadores.get(i).setNome(Nome_usuario);
 				Tab.jogadores.get(i).setDinheiro(2458);
-				System.out.println("O saldo de " + Tab.jogadores.get(i).getNome()+ " é: "+Tab.jogadores.get(i).getDinheiro());
+				Tab.jogadores.get(i).setId(j);
 				
 				/*Boolean resp = false, Email = false;
 				while (resp == false) {
@@ -129,7 +130,7 @@ public class Main {
 		 */
 		
 		Terreno Av_1 = new Terreno (1, "Av Nove de Julho", null, null, 1000, 60, 500, 500);
-		/*Terreno Av_2 = new Terreno (2, "Av Brasil", null, null, 1000, 40, 500, 500);
+		Terreno Av_2 = new Terreno (2, "Av Brasil", null, null, 1000, 40, 500, 500);
 		Terreno Av_3 = new Terreno (3, "Av Beira Mar", null, null, 1000, 20, 500, 500);
 		Terreno Av_4 = new Terreno (4, "Av Rio Branco", null, null, 2400, 200, 1500, 1500);
 		Terreno Av_5 = new Terreno (5, "Av do Estado", null, null, 2200, 180, 1500, 1500);
@@ -149,260 +150,258 @@ public class Main {
 		Terreno Av_19 = new Terreno (19, "Av Ibirapuera", null, null, 3000, 260,2000,2000);
 		Terreno Av_20 = new Terreno (20, "Av Vieira Souto", null, null, 2800, 260,1500,1500);
 		Terreno Av_21 = new Terreno (21, "Av Presidente Vargas", null, null, 2600, 220,1500,1500);
-		Terreno Av_22 = new Terreno (22, "Av Niemeyer", null, null, 2600, 220,1500,1500);*/
+		Terreno Av_22 = new Terreno (22, "Av Niemeyer", null, null, 2600, 220,1500,1500);
 		
 		Estacao RU = new Estacao (23, "RU", null, null, 2000, 500);
-		/*Estacao IFCH = new Estacao (24, "IFCH", null, null, 2000, 500);
+		Estacao IFCH = new Estacao (24, "IFCH", null, null, 2000, 500);
 		Estacao CB = new Estacao (25, "CB", null, null, 2000, 500);
 		Estacao FEF = new Estacao (26, "FEF", null, null, 2000, 500);
 		Estacao IC = new Estacao (27, "IC", null, null, 2000, 500);
-		Estacao PracaPaz = new Estacao (28, "Praça da Paz", null, null, 2000, 500);*/
+		Estacao PracaPaz = new Estacao (28, "Praça da Paz", null, null, 2000, 500);
 
-		
+		int x = 3;
 		int rod = 1;
 		boolean jogo;
 		for(int k = 0; k < rod; k++) {							// rodada 
-			escritor.write("\nRodada nº " + (k+1) + "\n");		
+			escritor.write("\nRodada nº " + (k+1) + "\n");
 			for(int j = 0; j < Num_Jogadores; j++) {			// n jogadores
 				Peca peca = Tab.jogadores.get(j).getPeca();		
-				System.out.println(" >>> Rodada do jogador(a): "+ Tab.jogadores.get(j).getNome() + " <<<");
-
-				int ld = Biblioteca.lancarDados();
-				RU.setTarifa(ld); //IFCH.setTarifa(ld); CB.setTarifa(ld); FEF.setTarifa(ld); IC.setTarifa(ld); PracaPaz.setTarifa(ld);
-				System.out.println("Você tirou " + ld + " nos dados");
-				peca.setPosicao(ld + peca.getPosicao());
-								
+				System.out.println("\n >>> Rodada do jogador(a): "+ Tab.jogadores.get(j).getNome() + " <<<");
+				if (Tab.jogadores.get(j).getId() < 900 ) {
+					int ld = Biblioteca.lancarDados();					
+					RU.setTarifa(ld); IFCH.setTarifa(ld); CB.setTarifa(ld); FEF.setTarifa(ld); IC.setTarifa(ld); PracaPaz.setTarifa(ld);
+					System.out.println("Você tirou " + ld + " nos dados");
+					peca.setPosicao(ld + peca.getPosicao());
+				}
 				if(peca.getPosicao()>40) {
 					int pos = peca.getPosicao() - 40;
 					peca.setPosicao(pos);
 					Tab.jogadores.get(j).setDinheiro(Tab.jogadores.get(j).getDinheiro() + 2000);
 				}
 				switch (peca.getPosicao()){
-					case 1:
-						System.out.println("Você caiu na casa: Iniciar"); //check
+					case 1: //check
+						System.out.println("Você caiu na casa: Iniciar");
 						escritor.write(Tab.jogadores.get(j).getNome() + " caiu na casa: Iniciar\n");
 						break;
-					case 2:
+					case 2: //check
 						System.out.println("Você caiu na casa: Av. Nove de Julho");
 						escritor.write(Tab.jogadores.get(j).getNome() + " caiu na casa: Av. Nove de Julho\n");
-						if ((Av_1.getDono()) == null){
-							System.out.println("Você quer comprar essa rua? (sim/não)");
-							String Op = teclado.nextLine();
-							if (Op.equalsIgnoreCase("sim")) {
-								System.out.println("Saldo antes da compra: "+ Tab.jogadores.get(j).getDinheiro());
-								System.out.println("Valor de "+ Av_1.getNome() + " é: " + Av_1.getPreco());
-
-								Tab.jogadores.get(j).setDinheiro(Tab.jogadores.get(j).getDinheiro() - Av_1.getPreco());
-								Av_1.setDono(Tab.jogadores.get(j));
-								System.out.println(Tab.jogadores.get(j).getNome() + ", seu saldo agora é: " + Tab.jogadores.get(j).getDinheiro());
-							} else if (Op.equalsIgnoreCase("não")){
-								break;
-							} else {
-					            System.out.println("Opção inválida.");
-					            break;
-					        }
-						} else if (Av_1.getDono() == Tab.jogadores.get(j)) {
-							System.out.println("Você quer adicionar uma casa? (sim/não)");
-							String Op = teclado.nextLine();
-							if (Op.equalsIgnoreCase("sim")) {
-								if(Av_1.getNumeroCasas() < 4) {
-									Tab.jogadores.get(j).setDinheiro(Tab.jogadores.get(j).getDinheiro() - Av_1.getValorCasa());
-									Av_1.comprarCasa();
-									System.out.println(Tab.jogadores.get(j).getNome() + " pagou aluguel para " + Av_1.getDono().getNome());
-									System.out.println(Tab.jogadores.get(j).getNome() + ", seu saldo agora é: " + Tab.jogadores.get(j).getDinheiro());
-
-								} else {
-									Tab.jogadores.get(j).setDinheiro(Tab.jogadores.get(j).getDinheiro() - Av_1.getValorHotel());
-									Av_1.comprarHotel();
-								}
-							}
-							break;
-						} else {
-							Tab.jogadores.get(j).setDinheiro(Tab.jogadores.get(j).getDinheiro() - Math.round(Av_1.getAluguel()));
-							Av_1.getDono().setDinheiro(Av_1.getDono().getDinheiro() + Math.round(Av_1.getAluguel()));
-							System.out.println(Av_1.getDono().getNome() + ", você recebeu um aluguel e seu saldo é: " + Av_1.getDono().getDinheiro());
-							break;
-						}
+						System.out.println(Jogadas.Av_1(Tab.jogadores.get(j), Av_1));
 						break;
-					case 3:
+					case 3: //check
 						System.out.println("Você caiu na casa: Av. Brasil");
 						escritor.write(Tab.jogadores.get(j).getNome() + " caiu na casa: Av. Brasil\n");
+						System.out.println(Jogadas.Av_2(Tab.jogadores.get(j), Av_2));
 						break;
-					case 4:
+					case 4: //check
 						System.out.println("Você caiu na casa: RU");
 						escritor.write(Tab.jogadores.get(j).getNome() + " caiu na casa: RU\n");
-						if ((RU.getDono()) == null){
-							System.out.println("Você quer comprar essa estação? (sim/não)");
-							String Op = teclado.nextLine();
-							if (Op.equalsIgnoreCase("sim")) {
-								Tab.jogadores.get(j).setDinheiro(Tab.jogadores.get(j).getDinheiro() - RU.getPreco());
-								RU.setDono(Tab.jogadores.get(j));
-								System.out.println(Tab.jogadores.get(j).getNome() + ", seu saldo agora é: " + Tab.jogadores.get(j).getDinheiro());
-							} else if (Op.equalsIgnoreCase("não")){
-								break;
-							} else {
-					            System.out.println("Opção inválida.");
-					            break;
-					        }
-						} else if (RU.getDono() != Tab.jogadores.get(j)) {
-							int aluguel = RU.calcularAluguel();
-							Tab.jogadores.get(j).setDinheiro(Tab.jogadores.get(j).getDinheiro() - aluguel);
-							RU.getDono().setDinheiro(RU.getDono().getDinheiro() + aluguel);
-							System.out.println(RU.getDono().getNome() + ", você recebeu um aluguel e seu saldo é: " + RU.getDono().getDinheiro());
-							System.out.println(Tab.jogadores.get(j).getNome() + ", seu novo saldo agora é: " + Tab.jogadores.get(j).getDinheiro());
-							break;
-						} else {
-							break;
-						}
+						System.out.println(Jogadas.RU(Tab.jogadores.get(j), RU));
 						break;
-					case 5:
+					case 5: //check
 						System.out.println("Você caiu na casa: Av. Beira Mar");
 						escritor.write(Tab.jogadores.get(j).getNome() + " caiu na casa: Av. Beira Mar\n");
+						System.out.println(Jogadas.Av_3(Tab.jogadores.get(j), Av_3));
 						break;
-					case 6:
+					case 6: //check
 						System.out.println("Você caiu na casa: Av. Rio Branco");
 						escritor.write(Tab.jogadores.get(j).getNome() + " caiu na casa: Av. Rio Branco\n");
+						System.out.println(Jogadas.Av_4(Tab.jogadores.get(j), Av_4));
 						break;
-					case 7:
+					case 7: //check
 						System.out.println("Você caiu na casa: Sorte/Reves");
 						escritor.write(Tab.jogadores.get(j).getNome() + " caiu na casa: Sorte/Reves\n");
-						//sorteio entre sorte e reves
-						// sorteio entre as opções que tem
-						// aplica a ação com o jogador que manda em determinada carta
+						System.out.println(Biblioteca.CartaSR(Tab.jogadores.get(j), Num_Jogadores));
 						break;
-					case 8:
+					case 8: //check
 						System.out.println("Você caiu na casa: Av. do Estado");
 						escritor.write(Tab.jogadores.get(j).getNome() + " caiu na casa: Av. do Estado\n");
+						System.out.println(Jogadas.Av_5(Tab.jogadores.get(j), Av_5));
 						break;
-					case 9:
+					case 9: //check
 						System.out.println("Você caiu na casa: IFCH");
 						escritor.write(Tab.jogadores.get(j).getNome() + " caiu na casa: IFCH\n");
+						System.out.println(Jogadas.IFCH(Tab.jogadores.get(j), IFCH));
 						break;
-					case 10:
+					case 10: //check
 						System.out.println("Você caiu na casa: Av. do Contorno");
 						escritor.write(Tab.jogadores.get(j).getNome() + " caiu na casa: Av. do Contorno\n");
+						System.out.println(Jogadas.Av_6(Tab.jogadores.get(j), Av_6));
 						break;
-					case 11:
-						System.out.println("Você caiu na casa: Prisão\n É apenas uma visita!"); //check
-						escritor.write(Tab.jogadores.get(j).getNome() + " caiu na casa: Prisão\n");
+					case 11: //check
+						System.out.println("Você caiu na casa: Prisão\n É apenas uma visita!");
+						escritor.write(Tab.jogadores.get(j).getNome() + " caiu na casa: Prisão, apenas visita\n");
 						break;
-					case 12:
+					case 12: //check
 						System.out.println("Você caiu na casa: Sorte/Reves");
 						escritor.write(Tab.jogadores.get(j).getNome() + " caiu na casa: Sorte/Reves\n");
+						System.out.println(Biblioteca.CartaSR(Tab.jogadores.get(j), Num_Jogadores));
 						break;
-					case 13:
+					case 13: //check
 						System.out.println("Você caiu na casa: Av. Reboucas");
 						escritor.write(Tab.jogadores.get(j).getNome() + " caiu na casa: Av. Reboucas\n");
+						System.out.println(Jogadas.Av_7(Tab.jogadores.get(j), Av_7));
 						break;
-					case 14:
+					case 14: //check
 						System.out.println("Você caiu na casa: Av. Santo Amaro");
 						escritor.write(Tab.jogadores.get(j).getNome() + " caiu na casa: Av. Santo Amaro\n");
+						System.out.println(Jogadas.Av_8(Tab.jogadores.get(j), Av_8));
 						break;
-					case 15:
+					case 15: //check
 						System.out.println("Você caiu na casa: CB");
 						escritor.write(Tab.jogadores.get(j).getNome() + " caiu na casa: CB\n");
+						System.out.println(Jogadas.CB(Tab.jogadores.get(j), CB));
 						break;
-					case 16:
+					case 16: //check
 						System.out.println("Você caiu na casa: Rua da Consolacao");
 						escritor.write(Tab.jogadores.get(j).getNome() + " caiu na casa: Rua da Consolacao\n");
+						System.out.println(Jogadas.Av_9(Tab.jogadores.get(j), Av_9));
 						break;
-					case 17:
+					case 17: //check
 						System.out.println("Você caiu na casa: Lucro/Dividendos");
 						escritor.write(Tab.jogadores.get(j).getNome() + " caiu na casa: Lucro/Dividendos\n");
+						Tab.jogadores.get(j).setDinheiro(Tab.jogadores.get(j).getDinheiro() + 2000);
 						break;
-					case 18:
+					case 18: //check
 						System.out.println("Você caiu na casa: Av. Morumbi");
 						escritor.write(Tab.jogadores.get(j).getNome() + " caiu na casa: Av. Morumbi\n");
+						System.out.println(Jogadas.Av_10(Tab.jogadores.get(j), Av_10));
 						break;
-					case 19:
+					case 19: //check
 						System.out.println("Você caiu na casa: Av. Higienopolis");
 						escritor.write(Tab.jogadores.get(j).getNome() + " caiu na casa: Av. Higienopolis\n");
+						System.out.println(Jogadas.Av_11(Tab.jogadores.get(j), Av_11));
 						break;
-					case 20:
+					case 20: //check
 						System.out.println("Você caiu na casa: Av. Sao Joao");
 						escritor.write(Tab.jogadores.get(j).getNome() + " caiu na casa: Av. Sao Joao\n");
+						System.out.println(Jogadas.Av_12(Tab.jogadores.get(j), Av_12));
 						break;
-					case 21:
-						System.out.println("Você caiu na casa: Parada Livre - Férias\n Aproveite um pouco, pegue uma bebiba!"); //check
+					case 21: //check
+						System.out.println("Você caiu na casa: Parada Livre - Férias\n Aproveite um pouco, pegue uma bebiba!");
 						escritor.write(Tab.jogadores.get(j).getNome() + " caiu na casa: Parada Livre\n");
 						break;
-					case 22:
+					case 22: //check
 						System.out.println("Você caiu na casa: Av. Ipiranga");
 						escritor.write(Tab.jogadores.get(j).getNome() + " caiu na casa: Av. Ipiranga\n");
+						System.out.println(Jogadas.Av_13(Tab.jogadores.get(j), Av_13));
 						break;
-					case 23:
+					case 23: //check
 						System.out.println("Você caiu na casa: FEF");
 						escritor.write(Tab.jogadores.get(j).getNome() + " caiu na casa: FEF\n");
+						System.out.println(Jogadas.FEF(Tab.jogadores.get(j), FEF));
 						break;
-					case 24:
+					case 24: //check
 						System.out.println("Você caiu na casa: Impostos de Renda");
 						escritor.write(Tab.jogadores.get(j).getNome() + " caiu na casa: Impostos de Renda\n");
+						Tab.jogadores.get(j).setDinheiro(Tab.jogadores.get(j).getDinheiro() - 2000);
 						break;
-					case 25:
+					case 25: //check
 						System.out.println("Você caiu na casa: Sorte/Reves");
 						escritor.write(Tab.jogadores.get(j).getNome() + " caiu na casa: Sorte/Reves\n");
+						System.out.println(Biblioteca.CartaSR(Tab.jogadores.get(j), Num_Jogadores));
 						break;
-					case 26:
+					case 26: //check
 						System.out.println("Você caiu na casa: Rua Brigadeiro Faria Lima");
 						escritor.write(Tab.jogadores.get(j).getNome() + " caiu na casa: Rua Brigadeiro Faria Lima\n");
+						System.out.println(Jogadas.Av_14(Tab.jogadores.get(j), Av_14));
 						break;
-					case 27:
+					case 27: //check
 						System.out.println("Você caiu na casa: Av. Paulista");
 						escritor.write(Tab.jogadores.get(j).getNome() + " caiu na casa: Av. Paulista\n");
+						System.out.println(Jogadas.Av_15(Tab.jogadores.get(j), Av_15));
 						break;
-					case 28:
+					case 28: //check
 						System.out.println("Você caiu na casa: Sorte/Reves");
 						escritor.write(Tab.jogadores.get(j).getNome() + " caiu na casa: Sorte/Reves\n");
+						System.out.println(Biblioteca.CartaSR(Tab.jogadores.get(j), Num_Jogadores));
 						break;
-					case 29:
+					case 29: //check
 						System.out.println("Você caiu na casa: Av. Recife");
 						escritor.write(Tab.jogadores.get(j).getNome() + " caiu na casa: Av. Recife\n");
+						System.out.println(Jogadas.Av_16(Tab.jogadores.get(j), Av_16));
 						break;
-					case 30:
+					case 30: //check
 						System.out.println("Você caiu na casa: IC");
 						escritor.write(Tab.jogadores.get(j).getNome() + " caiu na casa: IC\n");
+						System.out.println(Jogadas.IC(Tab.jogadores.get(j), IC));
 						break;
-					case 31:
+					case 31: //check
 						System.out.println("Você caiu na casa: Vá para a prisao\n Caiu a casa pra você!");
-						escritor.write(Tab.jogadores.get(j).getNome() + " caiu na casa: Vá para a prisao\n");
-						Tab.jogadores.get(j).getPeca().setPosicao(11);
-						// Colocar as formas que o jogador pode sair da prisão
-						break;
-					case 32:
+						escritor.write(Tab.jogadores.get(j).getNome() + " foi preso\n");
+						
+						if (Tab.jogadores.get(j).getId() < 900) {
+							Tab.jogadores.get(j).setId(999);
+						} else {
+							System.out.println("Você está preso!\n");
+								
+							int jog1 = Biblioteca.jogarDado(); System.out.println("\tVocê tirou " + jog1 + " no primeiro dado.");
+							int jog2 = Biblioteca.jogarDado(); System.out.println("\tVocê tirou " + jog2 + " no primeiro dado.\n");
+							
+							if (jog1 != jog2) {
+								int ID_At = Tab.jogadores.get(j).getId();
+								Tab.jogadores.get(j).setId(ID_At - 1);
+								x = Tab.jogadores.get(j).getId() - 996;
+								System.out.println("Você ainda tem " + x + " tentativas.");	
+								System.out.println("Seu ID atual é: " + Tab.jogadores.get(j).getId());
+								
+								if (Tab.jogadores.get(j).getId() == 996) {
+									Tab.jogadores.get(j).getPeca().setPosicao(11);
+									Tab.jogadores.get(j).setId(1);
+									Tab.jogadores.get(j).setDinheiro(Tab.jogadores.get(j).getDinheiro() - 500);
+									System.out.println("Você pagou a fiança de $500 e está solto.");
+								}
+							} else {
+								Tab.jogadores.get(j).getPeca().setPosicao(11);
+								Tab.jogadores.get(j).setId(1);
+								System.out.println("Você está solto.");
+							}
+						}
+							break;
+					case 32: //check
 						System.out.println("Você caiu na casa: Av. JK");
 						escritor.write(Tab.jogadores.get(j).getNome() + " caiu na casa: Av. JK\n");
+						System.out.println(Jogadas.Av_17(Tab.jogadores.get(j), Av_17));
 						break;
-					case 33:
+					case 33: //check
 						System.out.println("Você caiu na casa: Sorte/Reves");
 						escritor.write(Tab.jogadores.get(j).getNome() + " caiu na casa: Sorte/Reves\n");
+						System.out.println(Biblioteca.CartaSR(Tab.jogadores.get(j), Num_Jogadores));
 						break;
-					case 34:
+					case 34: //check
 						System.out.println("Você caiu na casa: Rua Oscar Freire");
 						escritor.write(Tab.jogadores.get(j).getNome() + " caiu na casa: Rua Oscar Freire\n");
+						System.out.println(Jogadas.Av_18(Tab.jogadores.get(j), Av_18));
 						break;
-					case 35:
+					case 35: //check
 						System.out.println("Você caiu na casa: Av. Ibirapuera");
 						escritor.write(Tab.jogadores.get(j).getNome() + " caiu na casa: Av. Ibirapuera\n");
+						System.out.println(Jogadas.Av_19(Tab.jogadores.get(j), Av_19));
 						break;
-					case 36:
+					case 36: //check
 						System.out.println("Você caiu na casa: Av. Vieira Souto");
 						escritor.write(Tab.jogadores.get(j).getNome() + " caiu na casa: Av. Vieira Souto\n");
+						System.out.println(Jogadas.Av_20(Tab.jogadores.get(j), Av_20));
 						break;
-					case 37:
+					case 37: //check
 						System.out.println("Você caiu na casa: Praça da Paz");
 						escritor.write(Tab.jogadores.get(j).getNome() + " caiu na casa: Praça da Paz\n");
+						System.out.println(Jogadas.Praca_Paz(Tab.jogadores.get(j), PracaPaz));
 						break;
-					case 38:
+					case 38: //check
 						System.out.println("Você caiu na casa: Av. Presidente Vargas");
 						escritor.write(Tab.jogadores.get(j).getNome() + " caiu na casa: Av. Presidente Vargas\n");
+						System.out.println(Jogadas.Av_21(Tab.jogadores.get(j), Av_21));
 						break;
-					case 39:
+					case 39: //check
 						System.out.println("Você caiu na casa: Sorte/Reves");
 						escritor.write(Tab.jogadores.get(j).getNome() + " caiu na casa: Sorte/Reves\n");
+						System.out.println(Biblioteca.CartaSR(Tab.jogadores.get(j), Num_Jogadores));
 						break;
-					case 40:
+					case 40: //check
 						System.out.println("Você caiu na casa: Av. Niemeyer");
 						escritor.write(Tab.jogadores.get(j).getNome() + " caiu na casa: Av. Niemeyer\n");
+						System.out.println(Jogadas.Av_22(Tab.jogadores.get(j), Av_22));
 						break;
 				}
 				if (Tab.jogadores.get(j).getDinheiro() <= 0) {
@@ -411,14 +410,14 @@ public class Main {
 					rod = rod - 2;
 				} else {
 					jogo = true;
-					System.out.println("Vocês querem jogar mais uma rodada? (sim/não)");
-					String Op = teclado.nextLine();
-					if (Op.equalsIgnoreCase("sim")) {
-						rod = rod + 1;	
-					} else {
-						rod = rod - 2;
-					}
 				}
+			}
+			System.out.println("Vocês querem jogar mais uma rodada? (sim/não)");
+			String Op = teclado.nextLine();
+			if (Op.equalsIgnoreCase("sim")) {
+				rod = rod + 1;	
+			} else {
+				rod = rod - 2;
 			}
 		}
 		escritor.close();
